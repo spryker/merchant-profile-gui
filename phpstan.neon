@@ -4,5 +4,8 @@ parameters:
             identifier: missingType.iterableValue
         -
             identifier: missingType.generics
+        # Defensive programming: type checks kept for runtime safety
+        -
+            identifier: instanceof.alwaysTrue
     level: 8
     reportUnmatchedIgnoredErrors: false
