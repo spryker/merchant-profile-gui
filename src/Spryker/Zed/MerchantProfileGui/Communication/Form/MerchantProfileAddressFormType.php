@@ -113,11 +113,6 @@ class MerchantProfileAddressFormType extends AbstractType
      */
     protected const LABEL_LONGITUDE = 'Longitude';
 
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
-     *
-     * @return void
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired(static::OPTION_COUNTRY_CHOICES);
@@ -265,9 +260,6 @@ class MerchantProfileAddressFormType extends AbstractType
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getBlockPrefix(): string
     {
         return 'merchant_profile_address';

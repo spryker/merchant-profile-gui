@@ -33,11 +33,6 @@ class MerchantProfileGuiDependencyProvider extends AbstractBundleDependencyProvi
      */
     public const FACADE_COUNTRY = 'FACADE_COUNTRY';
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     public function provideCommunicationLayerDependencies(Container $container): Container
     {
         $container = parent::provideCommunicationLayerDependencies($container);
@@ -49,11 +44,6 @@ class MerchantProfileGuiDependencyProvider extends AbstractBundleDependencyProvi
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addGlossaryFacade(Container $container): Container
     {
         $container->set(static::FACADE_GLOSSARY, function (Container $container) {
@@ -63,11 +53,6 @@ class MerchantProfileGuiDependencyProvider extends AbstractBundleDependencyProvi
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addLocaleFacade(Container $container): Container
     {
         $container->set(static::FACADE_LOCALE, function (Container $container) {
@@ -77,11 +62,6 @@ class MerchantProfileGuiDependencyProvider extends AbstractBundleDependencyProvi
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addCountryFacade(Container $container): Container
     {
         $container->set(static::FACADE_COUNTRY, function (Container $container) {

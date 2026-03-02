@@ -57,11 +57,6 @@ class MerchantProfileFormExpanderPlugin extends AbstractPlugin implements Mercha
         return $this;
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
-     * @return array
-     */
     protected function getMerchantProfileFormOptions(FormBuilderInterface $builder): array
     {
         $merchantProfileDataProvider = $this->getFactory()

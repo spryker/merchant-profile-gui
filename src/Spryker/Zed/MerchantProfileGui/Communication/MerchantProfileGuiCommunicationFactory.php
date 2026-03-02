@@ -22,17 +22,11 @@ use Symfony\Component\Form\FormTypeInterface;
  */
 class MerchantProfileGuiCommunicationFactory extends AbstractCommunicationFactory
 {
-    /**
-     * @return \Symfony\Component\Form\FormTypeInterface
-     */
     public function createMerchantProfileForm(): FormTypeInterface
     {
         return new MerchantProfileFormType();
     }
 
-    /**
-     * @return \Spryker\Zed\MerchantProfileGui\Communication\Form\DataProvider\MerchantProfileFormDataProvider
-     */
     public function createMerchantProfileFormDataProvider(): MerchantProfileFormDataProvider
     {
         return new MerchantProfileFormDataProvider(
@@ -42,9 +36,6 @@ class MerchantProfileGuiCommunicationFactory extends AbstractCommunicationFactor
         );
     }
 
-    /**
-     * @return \Spryker\Zed\MerchantProfileGui\Communication\Form\DataProvider\MerchantProfileAddressFormDataProvider
-     */
     public function createMerchantProfileAddressFormDataProvider(): MerchantProfileAddressFormDataProvider
     {
         return new MerchantProfileAddressFormDataProvider(
@@ -52,25 +43,16 @@ class MerchantProfileGuiCommunicationFactory extends AbstractCommunicationFactor
         );
     }
 
-    /**
-     * @return \Spryker\Zed\MerchantProfileGui\Dependency\Facade\MerchantProfileGuiToGlossaryFacadeInterface
-     */
     public function getGlossaryFacade(): MerchantProfileGuiToGlossaryFacadeInterface
     {
         return $this->getProvidedDependency(MerchantProfileGuiDependencyProvider::FACADE_GLOSSARY);
     }
 
-    /**
-     * @return \Spryker\Zed\MerchantProfileGui\Dependency\Facade\MerchantProfileGuiToLocaleFacadeInterface
-     */
     public function getLocaleFacade(): MerchantProfileGuiToLocaleFacadeInterface
     {
         return $this->getProvidedDependency(MerchantProfileGuiDependencyProvider::FACADE_LOCALE);
     }
 
-    /**
-     * @return \Spryker\Zed\MerchantProfileGui\Dependency\Facade\MerchantProfileGuiToCountryFacadeInterface
-     */
     public function getCountryFacade(): MerchantProfileGuiToCountryFacadeInterface
     {
         return $this->getProvidedDependency(MerchantProfileGuiDependencyProvider::FACADE_COUNTRY);

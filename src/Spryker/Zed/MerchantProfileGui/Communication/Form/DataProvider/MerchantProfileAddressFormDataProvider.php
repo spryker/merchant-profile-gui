@@ -18,9 +18,6 @@ class MerchantProfileAddressFormDataProvider
      */
     protected $countryFacade;
 
-    /**
-     * @param \Spryker\Zed\MerchantProfileGui\Dependency\Facade\MerchantProfileGuiToCountryFacadeInterface $countryFacade
-     */
     public function __construct(
         MerchantProfileGuiToCountryFacadeInterface $countryFacade
     ) {
@@ -39,9 +36,6 @@ class MerchantProfileAddressFormDataProvider
         ];
     }
 
-    /**
-     * @return array
-     */
     protected function prepareCountryChoices(): array
     {
         $countryChoices = [];

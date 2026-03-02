@@ -70,9 +70,6 @@ class MerchantProfileGlossaryAttributeLocaleFormType extends AbstractType
         return $this;
     }
 
-    /**
-     * @return \Symfony\Component\Form\CallbackTransformer
-     */
     protected function createStringToNumberTransformer(): CallbackTransformer
     {
         return new CallbackTransformer(
