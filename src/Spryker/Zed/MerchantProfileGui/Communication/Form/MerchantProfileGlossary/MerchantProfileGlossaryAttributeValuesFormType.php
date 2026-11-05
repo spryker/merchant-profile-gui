@@ -7,6 +7,7 @@
 
 namespace Spryker\Zed\MerchantProfileGui\Communication\Form\MerchantProfileGlossary;
 
+use Spryker\Zed\Gui\Communication\Form\Type\RichTextEditorType;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -88,6 +89,8 @@ class MerchantProfileGlossaryAttributeValuesFormType extends AbstractType
      */
     protected const LABEL_DATA_PRIVACY_GLOSSARY = 'Data Privacy';
 
+    protected const string LEGACY_HTML_EDITOR_CLASS = 'html-editor';
+
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
@@ -157,16 +160,13 @@ class MerchantProfileGlossaryAttributeValuesFormType extends AbstractType
      */
     protected function addTermsConditionsGlossaryKeyField(FormBuilderInterface $builder)
     {
-        $builder->add(static::FIELD_TERMS_CONDITIONS_GLOSSARY, TextareaType::class, [
+        $builder->add(static::FIELD_TERMS_CONDITIONS_GLOSSARY, $this->getRichTextFieldType(), $this->getRichTextFieldOptions([
             'label' => static::LABEL_TERMS_CONDITIONS_GLOSSARY,
             'required' => false,
-            'attr' => [
-                'class' => 'html-editor',
-            ],
             'sanitize_xss' => true,
             'allowed_attributes' => ['style'],
             'allowed_html_tags' => ['iframe'],
-        ]);
+        ]));
 
         return $this;
     }
@@ -178,16 +178,13 @@ class MerchantProfileGlossaryAttributeValuesFormType extends AbstractType
      */
     protected function addCancellationPolicyGlossaryKeyField(FormBuilderInterface $builder)
     {
-        $builder->add(static::FIELD_CANCELLATION_POLICY_GLOSSARY, TextareaType::class, [
+        $builder->add(static::FIELD_CANCELLATION_POLICY_GLOSSARY, $this->getRichTextFieldType(), $this->getRichTextFieldOptions([
             'label' => static::LABEL_CANCELLATION_POLICY_GLOSSARY,
             'required' => false,
-            'attr' => [
-                'class' => 'html-editor',
-            ],
             'sanitize_xss' => true,
             'allowed_attributes' => ['style'],
             'allowed_html_tags' => ['iframe'],
-        ]);
+        ]));
 
         return $this;
     }
@@ -199,16 +196,13 @@ class MerchantProfileGlossaryAttributeValuesFormType extends AbstractType
      */
     protected function addImprintGlossaryKeyField(FormBuilderInterface $builder)
     {
-        $builder->add(static::FIELD_IMPRINT_GLOSSARY, TextareaType::class, [
+        $builder->add(static::FIELD_IMPRINT_GLOSSARY, $this->getRichTextFieldType(), $this->getRichTextFieldOptions([
             'label' => static::LABEL_IMPRINT_GLOSSARY,
             'required' => false,
-            'attr' => [
-                'class' => 'html-editor',
-            ],
             'sanitize_xss' => true,
             'allowed_attributes' => ['style'],
             'allowed_html_tags' => ['iframe'],
-        ]);
+        ]));
 
         return $this;
     }
@@ -220,17 +214,49 @@ class MerchantProfileGlossaryAttributeValuesFormType extends AbstractType
      */
     protected function addDataPrivacyGlossaryKeyField(FormBuilderInterface $builder)
     {
-        $builder->add(static::FIELD_DATA_PRIVACY_GLOSSARY, TextareaType::class, [
+        $builder->add(static::FIELD_DATA_PRIVACY_GLOSSARY, $this->getRichTextFieldType(), $this->getRichTextFieldOptions([
             'label' => static::LABEL_DATA_PRIVACY_GLOSSARY,
             'required' => false,
-            'attr' => [
-                'class' => 'html-editor',
-            ],
             'sanitize_xss' => true,
             'allowed_attributes' => ['style'],
             'allowed_html_tags' => ['iframe'],
-        ]);
+        ]));
 
         return $this;
+    }
+
+    /**
+     * @phpstan-return class-string<\Symfony\Component\Form\FormTypeInterface>
+     */
+    protected function getRichTextFieldType(): string
+    {
+        if ($this->isGuiRichTextEditorTypeAvailable()) {
+            return RichTextEditorType::class;
+        }
+
+        return TextareaType::class;
+    }
+
+    /**
+     * @param array<string, mixed> $options
+     *
+     * @return array<string, mixed>
+     */
+    protected function getRichTextFieldOptions(array $options): array
+    {
+        if ($this->isGuiRichTextEditorTypeAvailable()) {
+            return $options;
+        }
+
+        return $options + [
+            'attr' => [
+                'class' => static::LEGACY_HTML_EDITOR_CLASS,
+            ],
+        ];
+    }
+
+    protected function isGuiRichTextEditorTypeAvailable(): bool
+    {
+        return class_exists(RichTextEditorType::class);
     }
 }
